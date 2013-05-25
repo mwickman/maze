@@ -1,5 +1,5 @@
-var width = 10;
-var height = 10;
+var width = 15;
+var height = 15;
 /*
   Bits for open square sides:
   North = 1
@@ -16,11 +16,11 @@ for (var i=0; i<height; i++) {
 	}
 }
 //testing grid
-console.log(grid.length);
+/*console.log(grid.length);
 console.log(grid[0]);
 console.log(grid[3]);
-
-// randomizer
+*/
+// array randomizer
 function fisherYates ( myArray ) {
   var i = myArray.length, j, tempi, tempj;
   if ( i === 0 ) return false;
@@ -34,36 +34,66 @@ function fisherYates ( myArray ) {
 }
 
 // constants for algorithm
-var N = 1;
-var S = 2;
-var E = 4;
-var W = 8;
-var dx = {
-  E: 1,
-  W: -1,
-  N: 0,
-  S: 0
+var cardinal = {
+  n: 1,
+  s: 2,
+  e: 4,
+  w: 8,
 }
+
+var dx = {
+  e: 1,
+  w: -1,
+  n: 0,
+  s: 0
+}
+
 var dy = {
-  E: 0,
-  W: 0,
-  N: -1,
-  S: 1
+  e: 0,
+  w: 0,
+  n: -1,
+  s: 1
 }
 var opposite = {
-  E: W,
-  W: E,
-  N: S,
-  S: N
+  e: 8,
+  w: 4,
+  n: 2,
+  s: 1
 }
+
+var nx =0;
+var ny = 0;
 
 //algorithm
 function carve(cx, cy, grid) {
-	fisherYates (var directions = ["N", "S", "E", "W"];)
-  conosle.log(directions[0]);
+  var directions = ['n', 's', 'e', 'w'];
+	fisherYates (directions);
+  //console.log(directions);
 
   for (var i=0; i<4; i++) {
-    var nx = cx + dx[directions[i]];
-    var ny = cy + dy[directions[i]];
+//    console.log(dx[directions[i]]);
+
+    nx = cx + dx[directions[i]];
+    //console.log(nx);
+    ny = cy + dy[directions[i]];
+    //console.log(grid[cx][cy]);
+
+    if ( ((ny >= 0) && (ny <= grid.length - 1)) && ((nx >= 0) && (nx <= grid[ny].length - 1)) && (grid[nx][ny] ==0) ) {
+      grid[cx][cy] = grid[cx][cy] + cardinal[directions[i]];
+      grid[ny][nx] = grid[ny][nx] + opposite[directions[i]];
+      //console.log("GOT HERE");
+
+      carve(nx, ny, grid);
+
+    }
   } 
+}
+
+// do it!
+carve(width-1, height-1, grid)
+
+//showing final bitfield grid
+console.log("::Final Grid::");
+for (var i=0; i< grid.length; i++) {
+  console.log(grid[i]);
 }
