@@ -89,7 +89,7 @@ function carve(cx, cy, grid) {
   } 
 }
 
-// do it!
+// generate the maze, do it!
 carve(width-1, height-1, grid)
 
 //showing final bitfield grid
