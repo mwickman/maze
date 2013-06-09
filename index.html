@@ -13,6 +13,8 @@ var c=document.getElementById('maze');
 var ctx=c.getContext('2d');
 
 var size = 20; //pixels, size of the square
+c.width= width*size+5;
+c.height = height*size+5;
 
 //should probably find a way to factor out some of the below
 for (var row=0; row<height; row++) {
