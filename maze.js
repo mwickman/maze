@@ -1,5 +1,5 @@
-width = 3;
-height = 3;
+var width = 5;
+var height = 5;
 /*
   Bits for open square sides:
   North = 1

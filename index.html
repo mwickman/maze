@@ -11,31 +11,34 @@
 
 var c=document.getElementById('maze');
 var ctx=c.getContext('2d');
-/*
-for (var x = 0.5; x < 500; x += 10) {
-  ctx.moveTo(x, 0);
-  ctx.lineTo(x, 375);
-}
-for (var y = 0.5; y < 375; y += 10) {
-  ctx.moveTo(0, y);
-  ctx.lineTo(500, y);
-}
-ctx.strokeStyle = "#000";
-ctx.stroke();
-*/
+
 var size = 20; //pixels, size of the square
 
+//should probably find a way to factor out some of the below
 for (var row=0; row<height; row++) {
 	for (var col=0; col<width; col++) {
-		if (grid[row][col] & cardinal['n'] == 0) {
+		console.log(grid[row][col] & cardinal['n']);
+		console.log("gothere");
+		if ((grid[row][col] & cardinal['n']) == 0) {
 			ctx.moveTo(0.5+size*col, 0.5+size*row);
 			ctx.lineTo(0.5+size*col+size, 0.5+size*row);
-
 		}
+		if ((grid[row][col] & cardinal['s']) == 0) {
+			ctx.moveTo(0.5+size*col + size, 0.5+size*row + size);
+			ctx.lineTo(0.5+size*col, 0.5+size*row + size);
+		}
+		if ((grid[row][col] & cardinal['e']) == 0) {
+			ctx.moveTo(0.5+size*col+size, 0.5+size*row + size);
+			ctx.lineTo(0.5+size*col + size, 0.5+size*row);
+		}
+		if ((grid[row][col] & cardinal['w']) == 0) {
+			ctx.moveTo(0.5+size*col, 0.5+size*row);
+			ctx.lineTo(0.5+size*col, 0.5+size*row+size);
+		} 
 
 	}
-
 }
+ctx.strokeStyle = "#000";
 ctx.stroke();
 
 </script>
