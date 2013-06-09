@@ -1,5 +1,5 @@
-var width = 15;
-var height = 15;
+width = 3;
+height = 3;
 /*
   Bits for open square sides:
   North = 1
@@ -15,11 +15,7 @@ for (var i=0; i<height; i++) {
 		grid[i][j]=0
 	}
 }
-//testing grid
-/*console.log(grid.length);
-console.log(grid[0]);
-console.log(grid[3]);
-*/
+
 // array randomizer
 function fisherYates ( myArray ) {
   var i = myArray.length, j, tempi, tempj;
@@ -61,36 +57,31 @@ var opposite = {
   s: 1
 }
 
-var nx =0;
-var ny = 0;
 
 //algorithm
 function carve(cx, cy, grid) {
   var directions = ['n', 's', 'e', 'w'];
 	fisherYates (directions);
-  //console.log(directions);
 
   for (var i=0; i<4; i++) {
-//    console.log(dx[directions[i]]);
 
-    nx = cx + dx[directions[i]];
-    //console.log(nx);
-    ny = cy + dy[directions[i]];
-    //console.log(grid[cx][cy]);
+    var nx = cx + dx[directions[i]];
+    var ny = cy + dy[directions[i]];
 
-    if ( ((ny >= 0) && (ny <= grid.length - 1)) && ((nx >= 0) && (nx <= grid[ny].length - 1)) && (grid[nx][ny] ==0) ) {
-      grid[cx][cy] = grid[cx][cy] + cardinal[directions[i]];
-      grid[ny][nx] = grid[ny][nx] + opposite[directions[i]];
-      //console.log("GOT HERE");
+// this if statement is nasty because im trying to avoid outside libraries, so I have no 'between' method
+    if ( ((ny >= 0) && (ny <= grid.length - 1)) && ((nx >= 0) && (nx <= grid[ny].length - 1)) && (grid[ny][nx] ==0) ) {
+      grid[cy][cx] = grid[cy][cx] | cardinal[directions[i]];
+      grid[ny][nx] = grid[ny][nx] | opposite[directions[i]];
 
       carve(nx, ny, grid);
 
     }
+
   } 
 }
 
 // generate the maze, do it!
-carve(width-1, height-1, grid)
+carve(0, 0, grid)
 
 //showing final bitfield grid
 console.log("::Final Grid::");
