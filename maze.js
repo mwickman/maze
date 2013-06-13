@@ -9,11 +9,14 @@ var height = 20;
 */
 // initializing the grid bitfield
 var grid = new Array();
-for (var i=0; i<height; i++) {
-    grid[i] = new Array();
-	for (var j=0; j < width; j++) {
-		grid[i][j]=0
-	}
+clearGrid();
+function clearGrid() {
+  for (var i=0; i<height; i++) {
+      grid[i] = new Array();
+  	for (var j=0; j < width; j++) {
+  		grid[i][j]=0
+  	}
+  }
 }
 
 // array randomizer

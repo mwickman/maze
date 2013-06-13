@@ -3,45 +3,50 @@
 <script src="maze.js"></script>
 
 <body>
-
+<button onclick="draw()">Refresh!</button>
 <canvas id="maze">Your browser does not support the HTML5 canvas tag.</canvas>
 
 <script>
 //Draw out the maze in canvas
+draw();
+function draw () {
+  clearGrid();
+  carve(0,0,grid);
+  var c=document.getElementById('maze');
+  var ctx=c.getContext('2d');
 
-var c=document.getElementById('maze');
-var ctx=c.getContext('2d');
+  var size = 20; //pixels, size of the square
+  c.width= width*size+5;
+  c.height = height*size+5;
 
-var size = 20; //pixels, size of the square
-c.width= width*size+5;
-c.height = height*size+5;
+  //should probably find a way to factor out some of the below
+  for (var row=0; row<height; row++) {
+    for (var col=0; col<width; col++) {
 
-//should probably find a way to factor out some of the below
-for (var row=0; row<height; row++) {
-	for (var col=0; col<width; col++) {
-		console.log(grid[row][col] & cardinal['n']);
-		console.log("gothere");
-		if ((grid[row][col] & cardinal['n']) == 0) {
-			ctx.moveTo(0.5+size*col, 0.5+size*row);
-			ctx.lineTo(0.5+size*col+size, 0.5+size*row);
-		}
-		if ((grid[row][col] & cardinal['s']) == 0) {
-			ctx.moveTo(0.5+size*col + size, 0.5+size*row + size);
-			ctx.lineTo(0.5+size*col, 0.5+size*row + size);
-		}
-		if ((grid[row][col] & cardinal['e']) == 0) {
-			ctx.moveTo(0.5+size*col+size, 0.5+size*row + size);
-			ctx.lineTo(0.5+size*col + size, 0.5+size*row);
-		}
-		if ((grid[row][col] & cardinal['w']) == 0) {
-			ctx.moveTo(0.5+size*col, 0.5+size*row);
-			ctx.lineTo(0.5+size*col, 0.5+size*row+size);
-		} 
+      if ((grid[row][col] & cardinal['n']) == 0) {
+        ctx.moveTo(0.5+size*col, 0.5+size*row);
+        ctx.lineTo(0.5+size*col+size, 0.5+size*row);
+      }
+      if ((grid[row][col] & cardinal['s']) == 0) {
+        ctx.moveTo(0.5+size*col + size, 0.5+size*row + size);
+        ctx.lineTo(0.5+size*col, 0.5+size*row + size);
+      }
+      if ((grid[row][col] & cardinal['e']) == 0) {
+          ctx.moveTo(0.5+size*col+size, 0.5+size*row + size);
+          ctx.lineTo(0.5+size*col + size, 0.5+size*row);
+      }
+      if ((grid[row][col] & cardinal['w']) == 0) {
+          ctx.moveTo(0.5+size*col, 0.5+size*row);
+          ctx.lineTo(0.5+size*col, 0.5+size*row+size);
+      } 
 
-	}
+     }
+  }
+  ctx.strokeStyle = "#000";
+  ctx.stroke();
 }
-ctx.strokeStyle = "#000";
-ctx.stroke();
+//buttons and forms on page
+
 
 </script>
 </body>
