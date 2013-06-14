@@ -4,17 +4,16 @@
 
 <body>
   <div>
-  <button onclick="draw()">Refresh!</button>
-  <input type="number" id="height">height</input>
-  <input type="number" id="width">width</input>
-  <input type="number" id="cell size">cell size</input>
-
+    <button onclick="draw()">Refresh!</button>
+    <input type="number" id="height">height</input>
+    <input type="number" id="width">width</input>
+    <input type="number" id="cell size">cell size</input>
   </div>
   
   <div>
     <canvas id="maze">Your browser does not support the HTML5 canvas tag.</canvas>
   </div>
-  </body>
+</body>
 <script>
 var height = 20;
 var size = 20;
@@ -60,6 +59,8 @@ function draw () {
   }
   ctx.strokeStyle = "#000";
   ctx.stroke();
+  //show grid in console
+  console.log("::Final Grid::");
   for (var i=0; i< grid.length; i++) {
   console.log(grid[i]);
   }
