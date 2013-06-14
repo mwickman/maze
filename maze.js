@@ -1,5 +1,4 @@
-var width = 20;
-var height = 20;
+
 /*
   Bits for open square sides:
   North = 1
@@ -9,7 +8,7 @@ var height = 20;
 */
 // initializing the grid bitfield
 var grid = new Array();
-clearGrid();
+
 function clearGrid() {
   for (var i=0; i<height; i++) {
       grid[i] = new Array();
