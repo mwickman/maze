@@ -8,6 +8,8 @@
 */
 // initializing the grid bitfield
 var grid = new Array();
+var height = 20;
+var width = 20;
 
 function clearGrid() {
   for (var i=0; i<height; i++) {
