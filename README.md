@@ -16,6 +16,7 @@ variables:
     grid - the maze bitfield itself, an array of arrays    
 
 and functions:
+
     clearGrid() - sets all cells of the grid to 0
     carve() - generates the maze
 
