@@ -20,16 +20,19 @@ var size = 20;
 //Draw out the maze in canvas
 draw();
 function draw () {
-  width = Number(document.getElementById('width').value) || 20;
-  height = Number(document.getElementById('height').value) || 20;
-  size = Number(document.getElementById('cell size').value) || 20;
-  clearGrid();
-  carve(0,0,grid);
+  var width = Number(document.getElementById('width').value) || 20;
+  var height = Number(document.getElementById('height').value) || 20;
+  var size = Number(document.getElementById('cell size').value) || 20;
+  //clearGrid();
+  //carve(0,0,grid);
   var c=document.getElementById('maze');
   var ctx=c.getContext('2d');
 
   c.width= width*size+25;
   c.height = height*size+5;
+  var maze = new Maze({width: width, height: height});
+  var grid = maze.grid;
+  var cardinal = maze.cardinal;
 
   //should probably find a way to factor out some of the below
   for (var row=0; row<height; row++) {
@@ -56,11 +59,6 @@ function draw () {
   }
   ctx.strokeStyle = "#000";
   ctx.stroke();
-  //show grid in console
-  console.log("::Final Grid::");
-  for (var i=0; i< grid.length; i++) {
-  console.log(grid[i]);
-  }
 }
 //buttons and forms on page
 
